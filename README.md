@@ -1,6 +1,48 @@
 # StudyScript
 "StudyScript" is a domain-specific language designed for creating study routines. It provides a simple and intuitive way to define tasks for studying, incorporating features such as variables, conditionals, and loops.
 
+## Code Example
+```cpp
+study_routine
+    var study_time = 120
+
+    // Check if there is enough time to read a book
+    if (study_time >= 60) {
+        task >> (read_book, 60, study_time)
+    } else {
+        print("There is not enough time to read a book.")
+    }
+
+    // Check if there is enough time to solve exercises
+    if (study_time >= 45) {
+        task >> (solve_exercises, 45, study_time)
+    } else {
+        print("There is not enough time to solve exercises.")
+    }
+
+    // Loop to watch multiple lectures until time runs out
+    var num_lectures = 0
+    while (study_time >= 30) {
+        task >> (watch_lecture, 30, study_time)
+        num_lectures = num_lectures + 1
+    }
+    print("Watched", num_lectures, "lectures.")
+
+    // Conditional to decide if there is time for a quiz
+    if (study_time >= 20) {
+        task >> (practice_quiz, 20, study_time)
+    } else {
+        print("There is not enough time to take a quiz.")
+    }
+
+    // Loop to review notes until time runs out
+    while (study_time >= 15) {
+        task >> (review_notes, 15, study_time)
+    }
+end_study_routine
+
+```
+
 ```EBNF
 STUDY_ROUTINE_PROGRAM = { BLOCK };
 
@@ -49,8 +91,9 @@ STRING = '"' ,{ CHAR } , '"';
 
 CHAR = any_character_except_double_quote;
 
-PRINT_STATEMENT = "print", "(", IDENTIFIER, ")", "\n";
+PRINT_STATEMENT = "print", "(", EXPRESSION, { ",", EXPRESSION }, ")", "\n";
 
 ```
 
 ## Diagram: 
+
