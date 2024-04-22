@@ -1,5 +1,5 @@
 # StudyScript
-"StudyScript" is a domain-specific language designed for creating study routines. It provides a simple and intuitive way to define tasks for studying, incorporating features such as variables, conditionals, and loops.
+"StudyScript" is a domain-specific language designed to simplify the process of creating study routines. It provides a structured and intuitive way to define tasks and manage study time effectively. The main idea behind StudyScript is to streamline the organization of study activities, making it easier for learners to plan and execute their study sessions.
 
 ## Code Example
 ```cpp
@@ -48,7 +48,8 @@ STUDY_ROUTINE_PROGRAM = { BLOCK };
 
 BLOCK = "study_routine", "\n", { STATEMENT }, "end_study_routine";
 
-STATEMENT = "λ" | VARIABLE_DECLARATION 
+STATEMENT = "λ" 
+            | VARIABLE_DECLARATION 
             | ASSIGNMENT_STATEMENT 
             | CONDITIONAL_STATEMENT 
             | LOOP_STATEMENT 
@@ -97,3 +98,4 @@ PRINT_STATEMENT = "print", "(", EXPRESSION, { ",", EXPRESSION }, ")", "\n";
 
 ## Diagram: 
 
+![Diagram](diagram.png)
