@@ -1,101 +1,100 @@
-# StudyScript
-"StudyScript" is a domain-specific language designed to simplify the process of creating study routines. It provides a structured and intuitive way to define tasks and manage study time effectively. The main idea behind StudyScript is to streamline the organization of study activities, making it easier for learners to plan and execute their study sessions.
+# WashLang
+WashLang is a specialized programming language designed to automate and control washing machines. This language allows users to specify washing routines including various washing modes such as heavy, normal, and quick cycles, along with options for extra rinse and turbo performance.
 
-## Code Example
-```cpp
-study_routine
-    var study_time = 120
+<p align="center">
+  <img src="Images/logo.webp" alt="WashLang" width="240"/>
+</p>
 
-    // Check if there is enough time to read a book
-    if (study_time >= 60) {
-        task >> (read_book, 60, study_time)
-    } else {
-        print("There is not enough time to read a book.")
-    }
+* #### [EBNF](#EBNF)
+* #### [Flex & Bison](#Flex-&-Bison)
 
-    // Check if there is enough time to solve exercises
-    if (study_time >= 45) {
-        task >> (solve_exercises, 45, study_time)
-    } else {
-        print("There is not enough time to solve exercises.")
-    }
+#### <a name="EBNF">EBNF</a> 
 
-    // Loop to watch multiple lectures until time runs out
-    var num_lectures = 0
-    while (study_time >= 30) {
-        task >> (watch_lecture, 30, study_time)
-        num_lectures = num_lectures + 1
-    }
-    print("Watched", num_lectures, "lectures.")
+```ebnf
+programa = { bloco }, EOF;
 
-    // Conditional to decide if there is time for a quiz
-    if (study_time >= 20) {
-        task >> (practice_quiz, 20, study_time)
-    } else {
-        print("There is not enough time to take a quiz.")
-    }
+bloco = comando | declaracao | loop | condicional;
 
-    // Loop to review notes until time runs out
-    while (study_time >= 15) {
-        task >> (review_notes, 15, study_time)
-    }
-end_study_routine
+declaracao = 'definir', identificador, 'como', expressao, ';';
 
-```
+comando = acao, ';'
+        | 'exibir', expressao, ';';
 
-```EBNF
-STUDY_ROUTINE_PROGRAM = { BLOCK };
+acao = 'lavar'
+     | 'centrifugar'
+     | 'enxaguar'
+     | selecionar_programa
+     | 'ativar enxague extra'
+     | 'ativar turbo performance'
+     | selecionar_nivel_agua;
 
-BLOCK = "study_routine", "\n", { STATEMENT }, "end_study_routine";
+selecionar_programa = 'selecionar programa de lavagem pesada'
+                     | 'selecionar programa de lavagem normal'
+                     | 'selecionar programa de lavagem rápido';
 
-STATEMENT = "λ" 
-            | VARIABLE_DECLARATION 
-            | ASSIGNMENT_STATEMENT 
-            | CONDITIONAL_STATEMENT 
-            | LOOP_STATEMENT 
-            | TASK
-            | PRINT_STATEMENT;
+selecionar_nivel_agua = 'selecionar nivel de agua baixo'
+                      | 'selecionar nivel de agua medio'
+                      | 'selecionar nivel de agua alto';
 
-VARIABLE_DECLARATION = "var", IDENTIFIER, "=", (NUMBER | STRING), "\n";
+expressao = expressao, ('mais' | 'menos' | 'vezes' | 'dividido por'), expressao
+          | expressao, ('igual' | 'maior que' | 'menor que' | 'maior ou igual a' | 'menor ou igual a'), expressao
+          | identificador
+          | numero
+          | texto;
 
-ASSIGNMENT_STATEMENT = IDENTIFIER, "=", (NUMBER | STRING), "\n";
+loop = 'enquanto', expressao, 'faca', { bloco }, 'fim', ';';
 
-CONDITIONAL_STATEMENT = "if", "(", CONDITION, ")", "{", STATEMENT, "}", "else", "{", STATEMENT, "}";
+condicional = 'se', expressao, 'entao', { bloco }, [ 'senao', { bloco } ], 'fim', ';';
 
-LOOP_STATEMENT = "repeat", "(", NUMBER, ")", "{", STATEMENT, "}";
+identificador = letra, { letra | digito | '_' };
 
-TASK = "task", ">>", "(", TASK_NAME, ",", NUMBER, ",", NUMBER, ")" , "\n";
+numero = digito, { digito };
 
-TASK_NAME = "read_book"
-            | "solve_exercises"
-            | "watch_lecture"
-            | "practice_quiz"
-            | "review_notes";
+texto = '"', { qualquer_caracter - '"' }, '"';
 
-NUMBER = DIGIT, { DIGIT };
-DIGIT = "0" | "1" | "..." | "9";
+letra = 'A' | 'B' | '...' | 'Z' | 'a' | 'b' | '...' | 'z';
 
-IDENTIFIER = LETTER, { LETTER | DIGIT | "_" };
+digito = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 
-LETTER = "A" | "B" | "..." | "Z" | "a" | "b" | "..." | "z";
+qualquer_caracter = letra | digito | simbolo;
 
-CONDITION = EXPRESSION, ("==", ">", "<"), EXPRESSION;
-
-EXPRESSION = TERM
-            | EXPRESSION, ("+" | "-" | "*" | "/"), TERM
-            | "(", EXPRESSION, ")"
-            | IDENTIFIER
-            | NUMBER
-            | STRING;
-
-STRING = '"' ,{ CHAR } , '"';
-
-CHAR = any_character_except_double_quote;
-
-PRINT_STATEMENT = "print", "(", EXPRESSION, { ",", EXPRESSION }, ")", "\n";
+simbolo = ':' | '/' | '*' | '+' | '-' | ',' | '.' | '"' | '(' | ')' | '[' | ']' | '{' | '}';
 
 ```
+![EBNF](Images/ebnf.png)
 
-## Diagram: 
+WashLang is tailored to manage washing machine operations efficiently. Here is an example of how to define and execute a washing routine:
+```python
+# Setting the water level and selecting the wash mode are prerequisites for starting the wash
+selecionar nivel de agua alto;
+selecionar programa de lavagem normal;
+ativar enxague extra;
+ativar turbo performance;
 
-![Diagram](diagram.png)
+# The washing machine follows these commands in a predefined sequence based on the selected program
+lavar;
+enxaguar;
+centrifugar;
+
+# Example to check the current mode and perform an action based on the condition
+se nivel_agua igual a "alto" entao
+    exibir "Nível de água está alto.";
+senao
+    exibir "Nível de água não está alto.";
+fim;
+```
+#### <a name="Flex-&-Bison">Flex & Bison</a> 
+
+To test the Flex & Bison you can do:
+```sh
+flex washlang.l
+bison -d washlang.y
+```
+
+```sh
+gcc lex.yy.c washlang.tab.c -o washlang -lfl
+```
+
+```sh
+./washlang test_input.txt
+```
