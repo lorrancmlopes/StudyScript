@@ -1,0 +1,32 @@
+-- Setting the water level and selecting the wash mode are prerequisites for starting the wash
+selecionar nivel de agua alto;
+selecionar programa de lavagem normal;
+ativar enxague extra;
+ativar turbo performance;
+
+-- The washing machine follows these commands in a predefined sequence based on the selected program
+lavar;
+enxaguar;
+centrifugar;
+
+-- Example to check the current mode and perform an action based on the condition
+se nivel_de_agua igual a "alto" entao
+    exibir "Nível de água está alto.";
+senao
+    exibir "Nível de água não está alto.";
+fim;
+
+exibir 5 mais 1;
+
+exibir 8 dividido por 2;
+
+exibir 3 vezes 2;
+
+exibir 4 menos 1;
+
+-- não pode ter variável chamada a, pois é uma palavra reservada
+definir a_ como 4 vezes 7;
+
+exibir a_;
+
+
