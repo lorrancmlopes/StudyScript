@@ -5,7 +5,7 @@ WashLang is a specialized programming language designed to automate and control 
   <img src="Images/logo.webp" alt="WashLang" width="240"/>
 </p>
 
-The presentation can be found [here](Presentation/WashLand.pdf).
+The presentation can be found [here](Presentation/WashLang.pdf).
 
 * #### [EBNF](#EBNF)
 * #### [Flex & Bison](#Flex-&-Bison)
