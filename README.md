@@ -5,6 +5,8 @@ WashLang is a specialized programming language designed to automate and control 
   <img src="Images/logo.webp" alt="WashLang" width="240"/>
 </p>
 
+The presentation can be found [here](Presentation/WashLand.pdf).
+
 * #### [EBNF](#EBNF)
 * #### [Flex & Bison](#Flex-&-Bison)
 
@@ -64,19 +66,19 @@ simbolo = ':' | '/' | '*' | '+' | '-' | ',' | '.' | '"' | '(' | ')' | '[' | ']' 
 ![EBNF](Images/ebnf.png)
 
 WashLang is tailored to manage washing machine operations efficiently. Here is an example of how to define and execute a washing routine:
-```python
-# Setting the water level and selecting the wash mode are prerequisites for starting the wash
+```bash
+-- Setting the water level and selecting the wash mode are prerequisites for starting the wash
 selecionar nivel de agua alto;
 selecionar programa de lavagem normal;
 ativar enxague extra;
 ativar turbo performance;
 
-# The washing machine follows these commands in a predefined sequence based on the selected program
+-- The washing machine follows these commands in a predefined sequence based on the selected program
 lavar;
 enxaguar;
 centrifugar;
 
-# Example to check the current mode and perform an action based on the condition
+-- Example to check the current mode and perform an action based on the condition
 se nivel_agua igual a "alto" entao
     exibir "Nível de água está alto.";
 senao

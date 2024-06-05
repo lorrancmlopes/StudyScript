@@ -1,0 +1,25 @@
+definir temperatura_agua como 30;
+definir tempo_de_ciclo como 2;
+
+selecionar programa de lavagem normal;
+
+selecionar nivel de agua medio;
+
+se temperatura_agua menor que 40 entao
+    ativar enxague extra;
+fim;
+
+selecionar programa de lavagem pesada;
+definir tempo_de_ciclo como tempo_de_ciclo mais 1;
+
+lavar;
+enxaguar;
+centrifugar;
+
+enquanto tempo_de_ciclo maior que 0 faca
+    exibir "Tempo restante: ";
+    exibir tempo_de_ciclo;
+    definir tempo_de_ciclo como tempo_de_ciclo menos 1;
+fim;
+
+exibir "Lavagem completa!";

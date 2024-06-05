@@ -1,0 +1,4 @@
+exibir 1 mais 2;
+exibir 4 menos 3;
+exibir 5 vezes 6;
+exibir 8 dividido por 2;

@@ -3,8 +3,8 @@ import re
 
 # Palavras reservadas
 RESERVED_KEYWORDS = ['definir', 'como', 'lavar', 'centrifugar', 'enxaguar', 'ativar', 'enxague', 'extra', 
-                     'turbo', 'performance', 'selecionar', 'programa',  'de', 'lavagem', 'pesada', 
-                     'normal', 'rápido', 
+                     'turbo', 'performance', 'selecionar', 'programa',  'de', 'lavagem',
+                     'pesada', 'normal', 'rápido', 
                      'nivel', 'agua', 'baixo', 'medio', 'alto',
                      'enquanto', 'faca', 'fim', 'se', 'entao', 'senao', 'exibir',
                      'menos', 'mais', 'vezes', 'dividido', 'por', 'e', 'ou', 'igual', 'menor', 'maior', 'que' , 'a']
@@ -16,7 +16,6 @@ class PrePro:
         code = re.sub(r'\n\s*\n', '\n', code)
         # Remove espaços em branco no final de cada linha com rstrip()
         code = '\n'.join([line.rstrip() for line in code.split('\n')])
-        #print(f"code: {code}")
         return code
 
 
@@ -39,18 +38,9 @@ class SymbolTable:
             return self.symbol_table[identifier]
 
 class Node:
-    i = 0
-
     def __init__(self, value=None):
         self.value = value
         self.children = []
-        self.id = self.newId()
-        # self.id = 4
-
-    @staticmethod
-    def newId():
-        Node.i += 1
-        return Node.i
 
     def evaluate(self):
         pass
@@ -60,14 +50,12 @@ class Block(Node):
     def evaluate(self, symbol_table):
         for child in self.children:
             if child != None:
-                #print(f"child: {child}")
                 child.evaluate(symbol_table)
 
 class Assignment(Node):
     def evaluate(self, symbol_table):
         identifier = self.children[0]
         value_node = self.children[1]  # Acessando o nó de valor
-        # print(f"isinstance(value_node, IntVal): {isinstance(value_node, IntVal)}")
         if isinstance(value_node, IntVal):  # Verificando se o nó de valor é do tipo IntVal
             value = value_node.evaluate()  # Se for, apenas obtemos o valor
         # vamos ver se é uma string
@@ -101,7 +89,6 @@ class BinOp(Node):
                 if right.value[0] == 0:
                     return IntVal((0, 'INT'))
                 return IntVal((left.value[0] // right.value[0], 'INT'))
-            # adicionar operadores de comparação and, or, ==, <, >:
             elif self.value == 'or':
                 if left.value[1] == 'INT' and right.value[1] == 'INT':
                     if left.value[0] or right.value[0]:
@@ -179,7 +166,6 @@ class Print(Node):
         if isinstance(self.children[0], IntVal) or isinstance(self.children[0], String):
             print(self.children[0].evaluate()[0])
         else:
-            # print("Else")
             # checar se é binOp. Se for, avaliar
             if isinstance(self.children[0], BinOp):
                 print(self.children[0].evaluate(symbol_table).value[0])
@@ -634,7 +620,6 @@ class Parser:
                 if token.type == 'NEWLINE':
                     block_node = Block()
                     token = Parser.tokenizer.selectNext()
-                    # não precisa ter um else, mas precisa ter um end pois é lua
                     while token.type != 'FIM':
                         # verifica se o token é um EOF e lança um erro
                         if token.type == 'EOF':

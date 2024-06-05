@@ -15,18 +15,3 @@ se nivel_de_agua igual a "alto" entao
 senao
     exibir "Nível de água não está alto.";
 fim;
-
-exibir 5 mais 1;
-
-exibir 8 dividido por 2;
-
-exibir 3 vezes 2;
-
-exibir 4 menos 1;
-
--- não pode ter variável chamada a, pois é uma palavra reservada
-definir a_ como 4 vezes 7;
-
-exibir a_;
-
-
